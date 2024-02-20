@@ -1,0 +1,35 @@
+{
+  "common": {
+    "title": "حصن المسلم"
+  },
+  "settings": {
+    "language": "اللغة"
+  },
+  "languages": {
+    "arabic": "العربية",
+    "english": "الانجليزية"
+  },
+  "navigation": {
+    "adhkar": "الأذكار",
+    "favorite": "المفضلة",
+    "settings": "الإعدادات"
+  },
+  "tabs": {
+    "categories": "الفئات",
+    "all": "كل الأذكار"
+  },
+  "duas": {
+    "chapters": "أجزاء",
+    "homeAndFamily": "البيت و الأهل",
+    "dayAndNight": "اليوم و الليلة",
+    "prayers": "الوضوء والصلاة",
+    "etiquetteAndDealing": "الآداب والتعامل",
+    "foodAndDrink": "الطعام و الشراب",
+    "hajjAndUmrah": "الحج والعمرة",
+    "happinessAndSadness": "السعادة والحزن",
+    "IllnessAndFunerals": "المرض والجنازات",
+    "nature": "الطبيعة",
+    "praises": "التسابيح",
+    "mobilityAndTravel": "التنقل والسفر"
+  }
+}

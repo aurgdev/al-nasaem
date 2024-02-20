@@ -1,0 +1,35 @@
+{
+  "common": {
+    "title": "Hisnul Muslim"
+  },
+  "settings": {
+    "language": "Language"
+  },
+  "languages": {
+    "arabic": "arabic",
+    "english": "english"
+  },
+  "navigation": {
+    "adhkar": "Adhkar",
+    "favorite": "Favorites",
+    "settings": "Settings"
+  },
+  "tabs": {
+    "categories": "categories",
+    "all": "all adhkar"
+  },
+  "duas": {
+    "chapters": "chapters",
+    "homeAndFamily": "home & family",
+    "dayAndNight": "morning & evening",
+    "prayers": "Prayer",
+    "etiquetteAndDealing": "Etiquette and dealing",
+    "foodAndDrink": "Food and drink",
+    "hajjAndUmrah": "Hajj and Umrah",
+    "happinessAndSadness": "happiness and sadness",
+    "IllnessAndFunerals": "Illness and funerals",
+    "nature": "nature",
+    "praises": "praises",
+    "mobilityAndTravel": "Mobility and travel"
+  }
+}
