@@ -1,77 +1,49 @@
-import { useTranslation } from "react-i18next";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import useAdhanStore from "@/context/adhan-store";
+import { useEffect } from "react";
+import { Button, ScrollView, Text, View } from "react-native";
 
 export default function Page() {
-  const { i18n, t } = useTranslation(["languages"]);
-  console.log(i18n.languages);
+  const { prayerTimes, fetchPrayerTimes, todayData } = useAdhanStore();
 
-  //array with all supported languages
-  const languages = [
-    { name: "ar", label: `${t("languages:arabic")}` },
-    { name: "en", label: `${t("languages:english")}` },
-  ];
-  const LanguageItem = ({ name, label }: { name: string; label: string }) => (
-    <Pressable
-      style={[
-        styles.link,
-        { alignItems: i18n.language === "ar" ? "flex-end" : "flex-start" },
-      ]}
-      onPress={() => {
-        i18n.changeLanguage(name); //changes the app language
-        // router.back();
-      }}
-    >
-      <View
-        style={[
-          styles.links,
-          { flexDirection: i18n.language === "ar" ? "row-reverse" : "row" },
-        ]}
-      >
-        {/* {i18n.language === name && (
-          <AntDesign
-            style={{ paddingHorizontal: 2 }}
-            name="check"
-            size={20}
-            color="black"
-          />
-        )} */}
-        <Text
-          style={[
-            styles.title,
-            { paddingHorizontal: i18n.language === name ? 0 : 24 },
-          ]}
-        >
-          {label}
-        </Text>
-      </View>
-    </Pressable>
-  );
+  useEffect(() => {
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth() + 1; // Month is 0-based in JavaScript
+
+    fetchPrayerTimes(currentYear, currentMonth, "Taroudant", "Maroc", 3); // Adjust city, country, and method as needed
+  }, [fetchPrayerTimes]);
 
   return (
-    <View style={styles.container}>
-      {languages.map((lang) => (
-        <LanguageItem {...lang} key={lang.name} />
-      ))}
+    <View>
+      <View style={{ flexDirection: "row" }}>
+        <Button
+          title="Islamic Society of North America"
+          onPress={() => fetchPrayerTimes(2024, 2, "Taroudant", "Maroc", 2)}
+        />
+      </View>
+      {prayerTimes && prayerTimes.length > 0 && (
+        <ScrollView>
+          <Text>
+            Today's Prayer Times:
+            {JSON.stringify(todayData, null, 2)}
+          </Text>
+          <View>
+            {prayerTimes
+              .filter((prayerTime) => {
+                const currentDay = new Date().getDate();
+                return Number(prayerTime.date.gregorian.day) === currentDay;
+              })
+              .map((prayerTime, index) => (
+                <View key={index}>
+                  <Text>{prayerTime.date.gregorian.date}</Text>
+                  <Text>{JSON.stringify(prayerTime.timings, null, 2)}</Text>
+                  {/* Add other prayer timings as needed */}
+                </View>
+              ))}
+          </View>
+          <Text>Closest Prayer Time: {prayerTimes[21].timings.Dhuhr}</Text>
+        </ScrollView>
+      )}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  links: {
-    display: "flex",
-  },
-  link: {
-    paddingVertical: 14,
-    paddingHorizontal: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: "#CCCCCC",
-    // elevation: 1,
-  },
-  title: {
-    textTransform: "capitalize",
-    fontSize: 16,
-  },
-});

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import "../global.css";
 import { useColorScheme } from "nativewind";
 import "../i18n";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -35,17 +36,19 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const { colorScheme } = useColorScheme();
-
+  const queryClient = new QueryClient();
   return (
-    <Stack
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: "#f472b6",
-        },
-        contentStyle: {
-          backgroundColor: colorScheme == "dark" ? "#09090B" : "#FFFFFF",
-        },
-      }}
-    />
+    <QueryClientProvider client={queryClient}>
+      <Stack
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: "#f472b6",
+          },
+          contentStyle: {
+            backgroundColor: colorScheme == "dark" ? "#09090B" : "#FFFFFF",
+          },
+        }}
+      />
+    </QueryClientProvider>
   );
 }
